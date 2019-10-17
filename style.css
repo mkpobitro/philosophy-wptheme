@@ -1,0 +1,34 @@
+    /* 
+    Theme Name: Philosophy
+    Theme URI: http://pobitroraj.com
+    Author: Pobitro Raj
+    Author URI: http://pobitroraj.com
+    Description: Philosophy by Colorlib
+    Tags: blog, education
+    License: GNU General Public License v2 or later
+    License URI: http://www.gnu.org/licenses/gpl-2.0
+    Text Domain: philosophy
+    */
+
+
+    .comments-wrap {
+        background-color: #e5e5e5;
+        padding: 8.4rem 0 9rem;
+        margin-top: 0 !important;
+    }
+
+    .s-footer{
+        background: #19191B;
+    }
+
+    .s-extra .row{
+        width: 94%;
+        max-width: 1200px !important;
+        margin: 0 auto;
+    }
+
+
+    .header__logo h1{
+        color: #fff;
+        
+    }
