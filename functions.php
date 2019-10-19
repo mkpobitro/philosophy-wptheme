@@ -13,7 +13,7 @@ if( site_url()=="localhost/basic-theme.dev" ){
 
 
 function philosophy_setup(){
-    load_theme_textdomain( "philosophy" );
+    load_theme_textdomain( "philosophy", get_theme_file_path("/languages") );
     add_theme_support( "title-tag" );
     add_theme_support( "post-thumbnails" );
     add_theme_support( "html5", array("search-form", "comment-list") );
@@ -59,6 +59,7 @@ add_action("wp_enqueue_scripts", "philosophy_assets");
             'current'       => max(1,get_query_var('paged')),
             'total'         => $wp_query->max_num_pages,
             'type'          => 'list',
+            'mid_size'      => apply_filters("philosophy_pagination_mid_size", 1)
         ));
 
         $links = str_replace("page-numbers", "pgn__num", $links);
@@ -161,7 +162,8 @@ add_action("widgets_init", "philosophy_widgets");
 
 
 // Search Form Filter
-
+// if(!function_exists("philosophy_search_form")){ //plugable function
+// }
 function philosophy_search_form($form){
     $homedir = home_url();
     $label = __("Search For", "philosophy");
@@ -178,3 +180,84 @@ FORM;
     return $newForm;
 }
 add_action("get_search_form", "philosophy_search_form");
+
+
+
+
+
+/*/ Custom Action hook added for category page
+function category_before_title(){
+    echo "Before Category Title";
+}
+add_action("philosophy_before_category_title", "category_before_title");
+
+function category_after_title(){
+    echo "After Category Title";
+}
+add_action("philosophy_after_category_title", "category_after_title");
+
+
+function category_before_desc(){
+    echo "<p>Before Category Description</p>";
+}
+add_action("philosophy_before_category_desc", "category_before_desc");
+
+function category_after_desc(){
+    echo "After Category Description";
+}
+add_action("philosophy_after_category_desc", "category_after_desc"); */
+
+
+
+
+
+
+// Custom Filter Hook Added for file MOdification. Its always return value
+
+function mid_size_pagination($size){
+    return 2;
+}
+add_filter("philosophy_pagination_mid_size","mid_size_pagination");
+
+
+function philosophy_top_text($param1, $param2){
+    return strtoupper($param1)." ".ucwords($param2);
+}
+add_filter("philosophy_text","philosophy_top_text",10,2);
+
+
+function philosophy_home_banner_class($class){
+    if(is_home()){
+        return $class;
+    }else{
+        return "";
+    }
+}
+add_filter("philosophy_home_banner_class","philosophy_home_banner_class");
+
+
+
+
+//For checking Hook Priority
+function category_before_title1(){
+    echo "Before Category Title 1<br>";
+}
+add_action("philosophy_before_category_title", "category_before_title1");
+
+function category_before_title2(){
+    echo "Before Category Title 2<br>";
+}
+add_action("philosophy_before_category_title", "category_before_title2",7);
+
+function category_before_title3(){
+    echo "Before Category Title 3<br>";
+}
+add_action("philosophy_before_category_title", "category_before_title3",9);
+
+
+
+
+// For Remove Hook
+remove_action("philosophy_before_category_title", "category_before_title3",9);
+remove_action("philosophy_before_category_title", "category_before_title2",7);
+remove_action("philosophy_before_category_title", "category_before_title1");
