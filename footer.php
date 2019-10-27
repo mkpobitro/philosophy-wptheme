@@ -17,18 +17,21 @@
 
                     While( $philosophy_popular_posts->have_posts() ){
                     $philosophy_popular_posts->the_post(); ?>
-                    <article class="col-block popular__post">
-                        <a href="<?php the_permalink() ?>" class="popular__thumb">
-                            <?php the_post_thumbnail() ?>
-                        </a>
-                        <h5><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5>
-                        <section class="popular__meta">
-                            <span class="popular__author"><span><?php _e("By", "philosophy") ?></span> <a href="<?php echo esc_url(get_author_posts_url(get_the_author_meta("ID"))); ?>"> <?php the_author() ?></a></span>
-                            <span class="popular__date"><span><?php _e("on", "philosophy") ?></span> <time datetime="2017-12-19"><?php echo get_the_date() ?></time></span>
-                        </section>
-                    </article>
+                 <article class="col-block popular__post">
+                     <a href="<?php the_permalink() ?>" class="popular__thumb">
+                         <?php the_post_thumbnail() ?>
+                     </a>
+                     <h5><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h5>
+                     <section class="popular__meta">
+                         <span class="popular__author"><span><?php _e("By", "philosophy") ?></span> <a
+                                 href="<?php echo esc_url(get_author_posts_url(get_the_author_meta("ID"))); ?>">
+                                 <?php the_author() ?></a></span>
+                         <span class="popular__date"><span><?php _e("on", "philosophy") ?></span> <time
+                                 datetime="2017-12-19"><?php echo get_the_date() ?></time></span>
+                     </section>
+                 </article>
 
-                    <?php }
+                 <?php }
                 wp_reset_query();
                 ?>
 
@@ -36,7 +39,7 @@
          </div> <!-- end popular -->
 
          <div class="col-four md-six tab-full about">
-            <?php 
+             <?php 
                 if( is_active_sidebar('before-ftr-right') ){
                     dynamic_sidebar('before-ftr-right');
                 }
@@ -47,13 +50,22 @@
      </div> <!-- end row -->
 
      <!-- Footer Tag Section -->
+
+     <?php 
+     $philosophy_footer_heading_tags = apply_filters("philosophy_footer_heading_tags", __("Tags", "philosophy"));
+     $philosophy_footer_item_tags = apply_filters("philosophy_footer_item_tags", get_tags());
+     ?>
      <div class="row bottom tags-wrap">
          <div class="col-full tags">
-             <h3><?php _e("Tags", "philosophy") ?></h3>
+             <h3><?php echo esc_html($philosophy_footer_heading_tags) ?></h3>
 
              <div class="tagcloud">
-                <?php the_tags("","","") ?>
-             </div> 
+                 <?php if(is_array($philosophy_footer_item_tags)){
+                    foreach($philosophy_footer_item_tags as $pit){
+                        printf("<a href='%s'>%s</a>", get_tag_link($pit->term_id), $pit->name );
+                    }
+                } ?>
+             </div>
          </div> <!-- end tags -->
      </div> <!-- end tags-wrap -->
 
@@ -71,7 +83,7 @@
 
                  <h4><?php _e("Quick Links", "philosophy") ?></h4>
 
-                <?php 
+                 <?php 
                     wp_nav_menu(array(
                         'theme_location'    => 'fl',
                         'menu_class'        => 's-footer__linklist',
@@ -110,7 +122,7 @@
              <!-- Footer Right Widget Section -->
              <div class="col-five md-full end s-footer__subscribe">
 
-                    <?php 
+                 <?php 
                         if(is_active_sidebar("footer-right")){
                             dynamic_sidebar("footer-right");
                         }
@@ -134,7 +146,7 @@
          </div>
      </div> <!-- end s-footer__main -->
 
-            <!-- Footer Bottom Section -->
+     <!-- Footer Bottom Section -->
      <div class="s-footer__bottom">
          <div class="row">
              <div class="col-full">

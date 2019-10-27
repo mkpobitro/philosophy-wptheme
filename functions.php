@@ -1,6 +1,7 @@
 <?php
 
 require_once(get_theme_file_path( "inc/tgm.php" ));
+require_once(get_theme_file_path( "inc/cmb2-attached-posts.php") );
 require_once(get_theme_file_path( "lib/attachments.php") );
 require_once(get_theme_file_path( "widgets/social-icons-widget.php") );
 
@@ -167,6 +168,15 @@ add_action("widgets_init", "philosophy_widgets");
 function philosophy_search_form($form){
     $homedir = home_url();
     $label = __("Search For", "philosophy");
+    $post_type = <<<PT
+<input type="hidden" name="post_type" value="post">
+PT;
+
+    if(is_post_type_archive("book")){ //for book it will only search from books custom post type
+        $post_type = <<<PT
+<input type="hidden" name="post_type" value="book">
+PT;
+    }
 
     $newForm = <<<FORM
     <form role="search" method="get" class="header__search-form" action="">
@@ -174,6 +184,7 @@ function philosophy_search_form($form){
         <span class="hide-content">{$label}</span>
         <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="{$label}" autocomplete="off">
     </label>
+    {$post_type}
     <input type="submit" class="search-submit" value="Search">
 </form>
 FORM;
@@ -261,3 +272,48 @@ add_action("philosophy_before_category_title", "category_before_title3",9);
 remove_action("philosophy_before_category_title", "category_before_title3",9);
 remove_action("philosophy_before_category_title", "category_before_title2",7);
 remove_action("philosophy_before_category_title", "category_before_title1");
+
+
+    //For Creating Slug for Chapter Post Type
+    function philosophy_cpt_slug_fix($post_link, $id){
+        $p = get_post($id);
+        if( is_object($p) && "chapter"==get_post_type($id) ){
+            $parent_post_id = get_field("parent_book");
+            $parent_post    = get_post($parent_post_id);
+            if($parent_post){
+                $post_link = str_replace("%book%", $parent_post->post_name, $post_link);
+            }
+        }
+        return $post_link;
+    }
+    add_filter("post_type_link", "philosophy_cpt_slug_fix",1,2);
+
+
+
+
+//Custom PosT types and taxonomy terms page showing languages instead of Tags in footer
+
+function philosophy_footer_heading_language($title){
+    if(is_post_type_archive( "book" ) || is_tax("language")){
+
+        $title = __("Language", "philosophy");
+    }
+    return $title;
+}
+
+ add_filter("philosophy_footer_heading_tags", "philosophy_footer_heading_language");   
+
+
+function philosophy_footer_item_language($items){
+    if(is_post_type_archive("book") || is_tax("language")){
+        $items = get_terms(array(
+            'taxonomy'  => 'language',
+        ));
+    }
+    return $items;
+}
+ add_filter("philosophy_footer_item_tags", "philosophy_footer_item_language");
+
+
+
+ 
