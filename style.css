@@ -5,6 +5,7 @@
     Author URI: http://pobitroraj.com
     Description: Philosophy by Colorlib
     Tags: blog, education
+    version: 1.0
     License: GNU General Public License v2 or later
     License URI: http://www.gnu.org/licenses/gpl-2.0
     Text Domain: philosophy
@@ -31,4 +32,18 @@
     .header__logo h1{
         color: #fff;
         
+    }
+
+    .metabox-option{
+        width: 80% !important;
+        margin: 0 auto;
+    }
+
+
+    /* Footer Social Button from option Panel */
+    .social-btn i{
+        margin: 0 5px 20px;
+    }
+    .social-btn a:hover{
+        color: greenyellow;
     }

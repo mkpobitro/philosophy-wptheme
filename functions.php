@@ -1,9 +1,25 @@
 <?php
 
-require_once(get_theme_file_path( "inc/tgm.php" ));
-require_once(get_theme_file_path( "inc/cmb2-attached-posts.php") );
-require_once(get_theme_file_path( "lib/attachments.php") );
-require_once(get_theme_file_path( "widgets/social-icons-widget.php") );
+require_once( get_theme_file_path( "inc/tgm.php" ));
+require_once( get_theme_file_path( "inc/cmb2-attached-posts.php") );
+require_once( get_theme_file_path( "lib/attachments.php") );
+require_once( get_theme_file_path( "widgets/social-icons-widget.php") );
+require_once( get_theme_file_path( "lib/csf/cs-framework.php") );
+// require_once( get_theme_file_path( "inc/cs-metabox-options.php") );
+// require_once( get_theme_file_path( "inc/cs-shortcode-options.php") );
+// require_once( get_theme_file_path( "inc/cs-taxonomy-options.php") );
+require_once( get_theme_file_path( "inc/cs-framework-options.php") );
+
+//Codestar Framework 
+define( 'CS_ACTIVE_FRAMEWORK',  true );
+define( 'CS_ACTIVE_METABOX',    true );
+define( 'CS_ACTIVE_TAXONOMY',   true );
+define( 'CS_ACTIVE_SHORTCODE',  true );
+define( 'CS_ACTIVE_CUSTOMIZE',  false );
+
+
+//For Codestar metabox theme color
+define( 'CS_ACTIVE_LIGHT_THEME',   false ); //defalut will be false
 
 if( site_url()=="localhost/basic-theme.dev" ){
 	define("VERSION", time());

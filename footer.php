@@ -51,7 +51,10 @@
 
      <!-- Footer Tag Section -->
 
-     <?php 
+     <?php //Footer tags will be show if footer tag switcher is on from option panel
+    $philosophy_ftr_tags = cs_get_option('footer_tag');
+    if($philosophy_ftr_tags):
+
      $philosophy_footer_heading_tags = apply_filters("philosophy_footer_heading_tags", __("Tags", "philosophy"));
      $philosophy_footer_item_tags = apply_filters("philosophy_footer_item_tags", get_tags());
      ?>
@@ -68,6 +71,7 @@
              </div>
          </div> <!-- end tags -->
      </div> <!-- end tags-wrap -->
+     <?php endif; ?>
 
  </section> <!-- end s-extra -->
 
@@ -128,6 +132,26 @@
                         }
                     ?>
 
+                <!-- Footer Social Button Showing from option panel  -->
+                <div class="social-btn"><?php
+                    $philosophy_social_facebook = cs_get_option('social_facebook');
+                    if($philosophy_social_facebook){
+                        echo "<a target='_blank' href='.esc_url($philosophy_social_facebook).'><i class='fa fa-facebook'></i></a>";
+                    }
+
+                    $philosophy_social_twitter = cs_get_option('social_twitter');
+                    if($philosophy_social_twitter){
+                        echo "<a target='_blank' href='.esc_url($philosophy_social_twitter).'><i class='fa fa-twitter'></i></a>";
+                    }
+
+                    $philosophy_social_behance = cs_get_option('social_behance');
+                    if($philosophy_social_behance){
+                        echo "<a target='_blank' href='.esc_url($philosophy_social_behance).'><i class='fa fa-behance'></i></a>";
+                    }
+                    ?>    
+                </div>
+                
+
                  <div class="subscribe-form">
                      <form id="mc-form" class="group" novalidate="true">
 
@@ -141,9 +165,13 @@
                      </form>
                  </div>
 
+                <!-- Option Panel Social facebook, twitter , behance showing -->
+
              </div> <!-- end s-footer__subscribe -->
 
+
          </div>
+
      </div> <!-- end s-footer__main -->
 
      <!-- Footer Bottom Section -->

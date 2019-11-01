@@ -91,14 +91,12 @@ function philosophy_register_required_plugins() {
 			'source'	=> 'https://github.com/CMB2/cmb2-attached-posts/archive/master.zip'
 		),
 
-	
 		array(
 			'name'      => 'Shortcake (Shortcode UI)',
 			'slug'      => 'shortcode-ui',
 			'required'  => false,
 		),
 
-	
 
 		// This is an example of how to include a plugin bundled with a theme.
 		array(
