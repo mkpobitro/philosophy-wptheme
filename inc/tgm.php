@@ -97,6 +97,14 @@ function philosophy_register_required_plugins() {
 			'required'  => false,
 		),
 
+		// array(
+		// 	'name'      => 'Codestar Framework',
+		// 	'slug'      => 'codestar-framework-master',
+		// 	'source'	=> get_theme_file_path('plugins/codestar-framework-master.zip'),
+		// 	'required'  => true,
+		// ),
+
+	
 
 		// This is an example of how to include a plugin bundled with a theme.
 		array(
